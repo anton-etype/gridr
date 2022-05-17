@@ -1,6 +1,6 @@
 # gridr
 
-You can install the package directly from GitHub with `devtools`. If you don't have it, you can install it with:
+You can install the package directly in R from GitHub with the package `devtools`. If you don't have `devtools`, you can install it with:
 
 `install.packages("devtools")`
 
