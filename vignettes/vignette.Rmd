@@ -1,0 +1,26 @@
+---
+title: "gridr - create a point grid in polygons"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package takes a spatial polygon layer and creates a grid point layer inside it. It also can select one of these points at random inside each polygon and calculate the distance and rank the distance to the other points inside the each polygon.
+
+A polygon can also be a multipolygon, i.e. be split into many polygons. A multipolygon is treated the same way as a regular polygon. So the package only select one sample site in each multipolygon. 
+
+```{r setup}
+library(gridr)
+grid <- createGrid(gridr_example("best.gpkg"), "best", 20, 20, c(-5, -2))
+sg <- getSubsample(grid)
+View(sg)
+```
