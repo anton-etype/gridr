@@ -1,32 +1,44 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # gridr
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of gridr is to …
+The goal of gridr is to ...
 
 ## Installation
 
-You can install the package directly in R from
-[GitHub](https://github.com/) with the package devtools. If you don’t
-have devtools, you can install it with:
+You can install the package directly in R from [GitHub](https://github.com/) with the package devtools. If you don't have devtools, you can install it with:
 
-``` r
+```{r, eval=F, echo=T}
 install.packages("devtools")
 ```
 
 Then you can install the packege with:
 
-``` r
+
+```{r, eval=F, echo=T}
 devtools::install_github("anton-etype/gridr")
 ```
 
-## Example
 
-``` r
+## Example
+```{r, eval=F, echo=T}
+
 library(gridr)
 library(sf)
 
@@ -70,4 +82,5 @@ subsample <- getSubsample(grid)
 
 # Saving to geopackage. 
 st_write(subsample, outPath, outLyrName, delete_layer = TRUE)
+
 ```

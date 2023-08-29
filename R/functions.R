@@ -46,8 +46,12 @@ createGrid <- function(gdbPath, lyrName, xdistGrid,
 
     #Creates a list of points a vector of ids
     for(r in 1:nrow(pCoords)){
-      coords[[length(coords) +1 ]] <- sf::st_point(pCoords[r,])
-      id[[length(id) +1 ]] <- i
+      point <- sf::st_point(pCoords[r,])
+      # if(lengths(st_intersects(p, point))==1){
+        # If point is inside the focus polygon. Add it to the lists
+        coords[[length(coords) +1 ]] <- point
+        id[[length(id) +1 ]] <- i
+      # }
     }
 
   }
@@ -69,8 +73,18 @@ createGrid <- function(gdbPath, lyrName, xdistGrid,
   sf::st_agr(fc) = "constant"
   sf::st_agr(points) = "constant"
 
+  # Add an id column to the polygons that matches the id column of the points
+  fc[,'p_id'] <- seq(1, nrow(fc))
+
   # Cut the points to intersect the polygons. Also adds polygon data to the points
   res <- sf::st_intersection(points, fc)
+
+  # Make sure that the points overlap the polygon that matches its id.
+
+  res <- res[res[,'id'] == res[, 'p_id'],]
+
+  # Drop the p_id column since it's not needed
+  res <- res[,-match('p_id', colnames(res))]
 
   res <- sf::st_transform(res, crs)
 
